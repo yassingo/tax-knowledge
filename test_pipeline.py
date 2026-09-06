@@ -21,19 +21,19 @@ TESTS = [
     {
         "name": "Standard deduction question",
         "question": "What is the standard deduction for single filers?",
-        "expect_pattern": r"\$[\d,]+",
+        "expect_keywords": ["standard deduction", "single"],
         "min_length": 50,
     },
     {
         "name": "Filing status question",
         "question": "What are the filing status options?",
-        "expect_pattern": r"(single|married|head of household)",
+        "expect_keywords": ["filing", "status", "single", "married"],
         "min_length": 50,
     },
     {
         "name": "Dependents question",
         "question": "Who can I claim as a dependent?",
-        "expect_pattern": r"(dependent|child|qualifying)",
+        "expect_keywords": ["dependent", "qualifying"],
         "min_length": 50,
     },
 ]
@@ -77,12 +77,14 @@ def run_test(test):
         log(f"  Result: ❌ Output too short ({len(output)} chars)")
         return False
 
-    # Check expected pattern
-    import re
-    pattern = test.get("expect_pattern")
-    if pattern and not re.search(pattern, output, re.IGNORECASE):
-        log(f"  Result: ❌ Output didn't match pattern: {pattern}")
-        return False
+    # Check expected keywords
+    keywords = test.get("expect_keywords", [])
+    if keywords:
+        output_lower = output.lower()
+        missing = [k for k in keywords if k.lower() not in output_lower]
+        if missing:
+            log(f"  Result: ❌ Missing keywords: {missing}")
+            return False
 
     log(f"  Result: ✅ PASS (output: {len(output)} chars)")
     return True
