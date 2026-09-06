@@ -15,7 +15,8 @@ BACKEND = "ollama"  # Change to "bedrock" when quota is available
 OLLAMA_MODEL = "qwen3:8b"
 
 # Bedrock model (cloud, requires AWS quota)
-BEDROCK_MODEL_ID = "anthropic.claude-3-haiku-20240307-v1:0"
+# Use the inference profile ARN for Claude 3 Haiku (works with cross-region routing)
+BEDROCK_MODEL_ID = "arn:aws:bedrock:us-east-1:275956851567:inference-profile/us.anthropic.claude-3-haiku-20240307-v1:0"
 BEDROCK_REGION = "us-east-1"
 
 
