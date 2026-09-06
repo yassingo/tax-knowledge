@@ -1,0 +1,67 @@
+{
+  "agents": [
+    {
+      "name": "ask_tax.py (one-shot)",
+      "success": true,
+      "duration": 58.52057695388794,
+      "output": "======================================\nThe standard deduction for single filers in 2025 is **$15,750**. This amount is explicitly stated in the provided excerpts under the \"Standard deduction amount increased\" section.\n\n[Sources: p17.pdf]\n============================================================\n"
+    },
+    {
+      "name": "auto_tax.py (self-correcting)",
+      "success": true,
+      "duration": 39.40938639640808,
+      "output": "UCCESS on attempt 1\n[16:40:17] \n============================================================\nFINAL ANSWER:\n============================================================\nTax RAG Pipeline (backend: ollama)\n============================================================\n\nTax RAG Pipeline (backend: ollama)\n"
+    },
+    {
+      "name": "goal_chain.py (verifier)",
+      "success": false,
+      "duration": 60,
+      "output": "TIMEOUT"
+    },
+    {
+      "name": "Bedrock Claude Haiku 3 (AWS)",
+      "success": false,
+      "duration": 8.118125677108765,
+      "output": "\naws: [ERROR]: An error occurred (ThrottlingException) when calling the InvokeModel operation (reached max retries: 2): Too many tokens per day, please wait before trying again.\n"
+    },
+    {
+      "name": "Ollama qwen3:8b (direct)",
+      "success": true,
+      "duration": 46.28680634498596,
+      "output": "Hello, friend!"
+    }
+  ],
+  "ranked": [
+    {
+      "name": "auto_tax.py (self-correcting)",
+      "success": true,
+      "duration": 39.40938639640808,
+      "output": "UCCESS on attempt 1\n[16:40:17] \n============================================================\nFINAL ANSWER:\n============================================================\nTax RAG Pipeline (backend: ollama)\n============================================================\n\nTax RAG Pipeline (backend: ollama)\n"
+    },
+    {
+      "name": "Ollama qwen3:8b (direct)",
+      "success": true,
+      "duration": 46.28680634498596,
+      "output": "Hello, friend!"
+    },
+    {
+      "name": "ask_tax.py (one-shot)",
+      "success": true,
+      "duration": 58.52057695388794,
+      "output": "======================================\nThe standard deduction for single filers in 2025 is **$15,750**. This amount is explicitly stated in the provided excerpts under the \"Standard deduction amount increased\" section.\n\n[Sources: p17.pdf]\n============================================================\n"
+    },
+    {
+      "name": "Bedrock Claude Haiku 3 (AWS)",
+      "success": false,
+      "duration": 8.118125677108765,
+      "output": "\naws: [ERROR]: An error occurred (ThrottlingException) when calling the InvokeModel operation (reached max retries: 2): Too many tokens per day, please wait before trying again.\n"
+    },
+    {
+      "name": "goal_chain.py (verifier)",
+      "success": false,
+      "duration": 60,
+      "output": "TIMEOUT"
+    }
+  ],
+  "tested_at": "2026-09-06T16:42:11.701169"
+}

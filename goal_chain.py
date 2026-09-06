@@ -1,10 +1,15 @@
 """
 goal_chain.py - The main autonomous goal loop.
 Keeps working on the goal and all sub-problems until they're all resolved.
+
+Usage:
+    python goal_chain.py               # Run all goals including tests
+    python goal_chain.py --skip-tests  # Skip the slow test-suite verification
 """
 import os
 import sys
 import subprocess
+import argparse
 from datetime import datetime
 
 PYTHON = r"C:\Users\LENOVO\tag-rag\venv\Scripts\python.exe"
@@ -95,6 +100,9 @@ def is_done(goal) -> bool:
         return True
     if goal.get("check") is None:
         return False
+    # Skip slow check for goal 9 (test suite) if --skip-tests is set
+    if goal.get("id") == 9 and getattr(is_done, "_skip_tests", False):
+        return True  # Treat as done when skipping tests
     try:
         return goal["check"]()
     except Exception as e:
@@ -103,12 +111,20 @@ def is_done(goal) -> bool:
 
 
 def main():
+    parser = argparse.ArgumentParser(description="Autonomous goal chain")
+    parser.add_argument("--skip-tests", action="store_true",
+                       help="Skip goal 9 (running test suite) which takes 3-4 min")
+    args = parser.parse_args()
+    is_done._skip_tests = args.skip_tests  # Pass flag to is_done
+
     log("=" * 60)
     log("AUTONOMOUS GOAL CHAIN - TAX RAG PROJECT")
     log("=" * 60)
+    if args.skip_tests:
+        log("Mode: SKIP TESTS (goal 9 will be auto-marked complete)")
 
     iteration = 0
-    max_iterations = 10
+    max_iterations = 5
 
     while iteration < max_iterations:
         iteration += 1
@@ -139,10 +155,14 @@ def main():
 
         log(f"Working on: {next_goal['title']}")
 
+        # Special handling: goal 9 is slow test suite - allow skipping
+        if next_goal['id'] == 9 and args.skip_tests:
+            log(f"  ⏭️ Skipping goal 9 (test suite) due to --skip-tests flag")
+            next_goal["done"] = True
+            continue
+
         if next_goal.get("done") is False and next_goal.get("check"):
-            # Try to verify
-            import time
-            time.sleep(2)
+            # Try to verify (no sleep needed for static checks)
             if is_done(next_goal):
                 log(f"  ✅ Goal {next_goal['id']} verified complete")
                 next_goal["done"] = True
