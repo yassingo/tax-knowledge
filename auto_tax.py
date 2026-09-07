@@ -114,8 +114,8 @@ def auto_tax_loop(question: str, max_tries: int = 5):
 
         # Step 3: If acceptable, done!
         if is_ok:
-            log(f"🎯 SUCCESS on attempt {attempt}")
-            log(f"\n{'='*60}\nFINAL ANSWER:\n{'='*60}\n{clean_answer}\n{'='*60}")
+            # 🎯 SUCCESS on attempt {attempt} printed by main()
+            # 🎯 FINAL ANSWER printed by main()
             return clean_answer
 
         # Step 4: Reformulate and retry
