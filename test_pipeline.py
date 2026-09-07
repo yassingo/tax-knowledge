@@ -21,7 +21,7 @@ TESTS = [
     },
     {
         "name": "Standard deduction question",
-        "question": "What is the standard deduction for single filers?",
+        "question": "What is the standard deduction for single filers in 2025?",
         "expect_keywords": ["standard", "deduction"],
         "min_length": 50,
     },
