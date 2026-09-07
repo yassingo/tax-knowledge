@@ -1,0 +1,92 @@
+{
+  "cagrex_scope": {
+    "typescript_files": 141,
+    "python_files": 0,
+    "markdown_files": 120,
+    "total_size_mb": 10.7,
+    "lines_of_code_estimate": "~25,000",
+    "current_phase": "Mostly built (Logic + AI Build phases done; Debug + Review are 'coming soon')"
+  },
+  "models": {
+    "fable-5.1": {
+      "quality": 9,
+      "cost_per_1k": 0.003,
+      "speed": 8,
+      "best_for": "Premium design + code, doc, complex reasoning",
+      "context": 200000
+    },
+    "sonnet-5": {
+      "quality": 9,
+      "cost_per_1k": 0.003,
+      "speed": 7,
+      "best_for": "Reasoning, code, premium",
+      "context": 200000
+    },
+    "deepseek-v4-pro": {
+      "quality": 8,
+      "cost_per_1k": 0.00014,
+      "speed": 8,
+      "best_for": "Budget code, long context",
+      "context": 128000
+    },
+    "gemini-3.7-flash": {
+      "quality": 7,
+      "cost_per_1k": 7.5e-05,
+      "speed": 10,
+      "best_for": "Fast, long context, budget",
+      "context": 1000000
+    },
+    "ollama-qwen3-8b": {
+      "quality": 7,
+      "cost_per_1k": 0.0,
+      "speed": 6,
+      "best_for": "Free local, drafts",
+      "context": 8000
+    },
+    "minimax-m3-free": {
+      "quality": 7,
+      "cost_per_1k": 0.0,
+      "speed": 8,
+      "best_for": "Free quality, general",
+      "context": 128000
+    }
+  },
+  "scenarios": {
+    "minimal_patches": {
+      "description": "Small bug fixes, 1-2 file changes, few hours of work",
+      "queries": 10,
+      "avg_tokens": 3000,
+      "fable_cost": 0.09,
+      "smart_route_cost": 0.01,
+      "ollama_cost": 0.0,
+      "recommended": "Ollama (free) or minimax-m3-free"
+    },
+    "feature_addition": {
+      "description": "New feature, 5-10 files, 1-2 days of work",
+      "queries": 50,
+      "avg_tokens": 5000,
+      "fable_cost": 0.75,
+      "smart_route_cost": 0.1,
+      "ollama_cost": 0.0,
+      "recommended": "Mix: Fable 5.1 for design, Ollama for code"
+    },
+    "major_refactor": {
+      "description": "Refactor, 20+ files, 1 week of work",
+      "queries": 200,
+      "avg_tokens": 6000,
+      "fable_cost": 3.6,
+      "smart_route_cost": 0.5,
+      "ollama_cost": 0.0,
+      "recommended": "Fable for critical, Ollama for boilerplate"
+    },
+    "full_app_build": {
+      "description": "Build all remaining phases (Debug + Review)",
+      "queries": 1000,
+      "avg_tokens": 8000,
+      "fable_cost": 24.0,
+      "smart_route_cost": 3.0,
+      "ollama_cost": 0.0,
+      "recommended": "Smart router (saves 85% vs Fable-only)"
+    }
+  }
+}
